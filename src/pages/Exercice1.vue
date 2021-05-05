@@ -46,7 +46,7 @@
         <label class="error" v-show="age>100 || age<1">Veuillez entrer un âge compris entre 1 et 100</label>
       </div>
       <div class="row">
-        <button>Générer une personne</button>
+        <button @click="randomName">Générer une personne</button>
       </div>
     </div>
     <div class="description q-mb-lg" v-if="nom.length<16 && age<101 && age>0">
@@ -70,7 +70,9 @@ export default {
   data () {
     return {
       nom: 'Thomas',
-      age: 20
+      age: 20,
+      listeNoms: ['Patrick', 'Fabrice', 'Magalie', 'Gérard', 'Pascal'],
+      nomChoisi: ''
     }
   },
   computed: {
@@ -82,6 +84,12 @@ export default {
     },
     nbLettres () {
       return this.nom.length
+    }
+  },
+  methods: {
+    randomName: function () {
+      var nbChoisi = Math.floor(Math.random() * this.listeNoms.length)
+      this.nomChoisi = this.list[nbChoisi]
     }
   }
 }
