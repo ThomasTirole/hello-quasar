@@ -64,6 +64,9 @@
 <script>
 export default {
   name: 'Exercice1',
+  mounted () {
+    document.title = 'Exercice 1 | Quasar '
+  },
   data () {
     return {
       nom: 'Thomas',
