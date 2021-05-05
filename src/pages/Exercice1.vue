@@ -37,25 +37,25 @@
       <div class="row q-mb-md">
         <label>Nom:</label>
         <input v-model="nom" type="text">
-        <label class="error">Maximum 15 caractères
+        <label class="error" v-show="nom.length>15">Maximum 15 caractères
         </label>
       </div>
       <div class="row q-mb-md">
         <label>Age:</label>
         <input v-model.number="age" type="number">
-        <label class="error">Veuillez entrer un âge compris entre 1 et 100</label>
+        <label class="error" v-show="age>100 || age<1">Veuillez entrer un âge compris entre 1 et 100</label>
       </div>
       <div class="row">
         <button>Générer une personne</button>
       </div>
     </div>
-    <div class="description q-mb-lg">
+    <div class="description q-mb-lg" v-if="nom.length<16 && age<101 && age>0">
       <p>Mon nom est <b>{{ nom }}</b> et j'ai <b>{{  age }}</b> ans.</p>
       <p>Dans 10 ans, j'aurai <b>{{agePlus}}</b> ans.</p>
       <p>Mon nom se compose de <b>{{ nbLettres }}</b> caractères.</p>
       <p>Mon nom en majuscules est <b>{{ nomMajuscule }}</b>.</p>
     </div>
-    <div class="no-details">
+    <div class="no-details" v-if="nom.length>15 || age>100 || age<1">
       <p>Veuillez entrer un nom et un âge valide !</p>
     </div>
   </q-page>
