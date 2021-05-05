@@ -36,13 +36,13 @@
     <div class="form q-mb-lg">
       <div class="row q-mb-md">
         <label>Nom:</label>
-        <input v-model="nom" type="text">
+        <input v-bind:class = "(nom.length>15)?'error':''" v-model="nom" type="text">
         <label class="error" v-show="nom.length>15">Maximum 15 caractères
         </label>
       </div>
       <div class="row q-mb-md">
         <label>Age:</label>
-        <input v-model.number="age" type="number">
+        <input v-bind:class ="(age>100 || age<1)?'error':''" v-model.number="age" type="number">
         <label class="error" v-show="age>100 || age<1">Veuillez entrer un âge compris entre 1 et 100</label>
       </div>
       <div class="row">
