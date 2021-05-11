@@ -37,8 +37,7 @@
       <div class="row q-mb-md">
         <label>Nom:</label>
         <input v-bind:class = "(nom.length>15)?'error':''" v-model="nom" type="text">
-        <label class="error" v-show="nom.length>15">Maximum 15 caractères
-        </label>
+        <label class="error" v-show="nom.length>15">Maximum 15 caractères</label>
       </div>
       <div class="row q-mb-md">
         <label>Age:</label>
@@ -58,6 +57,7 @@
     <div class="no-details" v-if="nom.length>15 || age>100 || age<1">
       <p>Veuillez entrer un nom et un âge valide !</p>
     </div>
+    <p>Le nom : {{nomChoisi}}</p>
   </q-page>
 </template>
 
