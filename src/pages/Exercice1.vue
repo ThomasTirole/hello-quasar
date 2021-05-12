@@ -36,8 +36,8 @@
     <div class="form q-mb-lg">
       <div class="row q-mb-md">
         <label>Nom:</label>
-        <input v-bind:class = "(nom.length>15)?'error':''" v-model="nom" type="text">
-        <label class="error" v-show="nom.length>15">Maximum 15 caractères</label>
+        <input v-autofocus :class = "(nom.length>15 || nom.length <1)?'error':''" v-model="nom" type="text">
+        <label class="error" v-show="nom.length>15 || nom.length <1">Maximum 15 caractères</label>
       </div>
       <div class="row q-mb-md">
         <label>Age:</label>
@@ -54,7 +54,7 @@
       <p>Mon nom se compose de <b>{{ nbLettres }}</b> caractères.</p>
       <p>Mon nom en majuscules est <b>{{ nomMajuscule }}</b>.</p>
     </div>
-    <div class="no-details" v-if="nom.length>15 || age>100 || age<1">
+    <div class="no-details" v-if="nom.length < 1 || nom.length>15 || age>100 || age<1">
       <p>Veuillez entrer un nom et un âge valide !</p>
     </div>
     <p>Le nom : {{nomChoisi}}</p>
@@ -62,17 +62,26 @@
 </template>
 
 <script>
+const names = [
+  'Patrick',
+  'Francis',
+  'Marie',
+  'Boba Fett',
+  'Cyril',
+  'Didier',
+  'Jin'
+]
+
 export default {
   name: 'Exercice1',
   mounted () {
     document.title = 'Exercice 1 | Quasar '
+    this.randomName()
   },
   data () {
     return {
-      nom: 'Thomas',
-      age: 20,
-      listeNoms: ['Patrick', 'Fabrice', 'Magalie', 'Gérard', 'Pascal'],
-      nomChoisi: ''
+      nom: '',
+      age: ''
     }
   },
   computed: {
@@ -86,10 +95,17 @@ export default {
       return this.nom.length
     }
   },
+  directives: {
+    autofocus: {
+      inserted (el) {
+        el.focus()
+      }
+    }
+  },
   methods: {
     randomName: function () {
-      var nbChoisi = Math.floor(Math.random() * this.listeNoms.length)
-      this.nomChoisi = this.list[nbChoisi]
+      this.nom = names[Math.floor(Math.random() * names.length)]
+      this.age = Math.floor(Math.random() * 100)
     }
   }
 }
