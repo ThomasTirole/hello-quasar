@@ -57,7 +57,6 @@
     <div class="no-details" v-if="nom.length < 1 || nom.length>15 || age>100 || age<1">
       <p>Veuillez entrer un nom et un âge valide !</p>
     </div>
-    <p>Le nom : {{nomChoisi}}</p>
   </q-page>
 </template>
 
